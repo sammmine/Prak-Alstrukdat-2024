@@ -15,14 +15,13 @@ void CreateComplex(COMPLEX *C, float Re, float Im) {
 void BacaCOMPLEX(COMPLEX *C) {
     float Re, Im;
 
-    scanf("%.2f", &Re);
-    scanf("%.2f", &Im);
+    scanf("%.2f %.2f", &Re, &Im);
 
-    if (IsCOMPLEXValid(Re, Im)) {
-        CreateComplex(&C, Re, Im);
-    } else {
-        printf("Input tidak valid.\n");
+    while (!IsCOMPLEXValid(Re, Im)){
+        printf("Complex tidak valid.\n");
+        scanf("%.2f %.2f", &Re, &Im);
     }
+    CreateComplex(C, Re, Im);
 }
 
 void TulisCOMPLEX(COMPLEX C) {
@@ -98,5 +97,5 @@ boolean CEQ(COMPLEX C1, COMPLEX C2) {
 }
 
 boolean CNEQ(COMPLEX C1, COMPLEX C2) {
-    return ((C1).Re != (C2).Re || (C1).Im != (C2).Im || ((C1).Re != (C2).Re && (C1).Im != (C2).Im));
+    return ((C1).Re != (C2).Re && (C1).Im != (C2).Im);
 }
