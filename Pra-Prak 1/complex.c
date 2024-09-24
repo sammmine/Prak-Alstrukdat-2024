@@ -4,7 +4,7 @@
 #include "boolean.h"
 
 boolean IsCOMPLEXValid(float Re, float Im) {
-    return TRUE;
+    return 1;
 }
 
 void CreateComplex(COMPLEX *C, float Re, float Im) {
@@ -22,7 +22,7 @@ void BacaCOMPLEX(COMPLEX *C) {
         printf("Complex tidak valid.\n");
         scanf("%.2f %.2f", &Re, &Im);
     }
-    CreateComplex(&C, Re, Im);
+    CreateComplex(C, Re, Im);
 }
 
 void TulisCOMPLEX(COMPLEX C) {

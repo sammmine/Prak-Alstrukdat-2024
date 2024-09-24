@@ -71,7 +71,7 @@ POINT PlusDelta(POINT P, float deltaX, float deltaY) {
 }
 
 POINT MirrorOf(POINT P, boolean SbX) {
-    if (SbX = TRUE) {
+    if (SbX) {
         // thdp sumbu x
         (P).Y *= (-1);
     } else {
@@ -104,7 +104,7 @@ void GeserKeSbY(POINT *P) {
 }
 
 void Mirror(POINT *P, boolean SbX) {
-    if (SbX = TRUE) {
+    if (SbX) {
         // thdp sumbu x
         Ordinat(*P) *= (-1);
     } else {
