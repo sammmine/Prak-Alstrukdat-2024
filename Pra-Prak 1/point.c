@@ -1,9 +1,11 @@
 #include <stdio.h>
+#include <math.h>
 #include "point.h"
+#include "boolean.h"
 
 void CreatePoint (POINT *P, float X, float Y) {
-    P->X = X;
-    P->Y = Y;
+    Absis(*P) = X;
+    Ordinat(*P) = Y;
 }
 
 void BacaPOINT(POINT *P) {
@@ -22,7 +24,7 @@ boolean EQ(POINT P1, POINT P2) {
 }
 
 boolean NEQ(POINT P1, POINT P2) {
-    return ((P1).X != (P2).X && (P1).Y != (P2).Y);
+    return ((P1).X != (P2).X || (P1).Y != (P2).Y);
 }
 
 boolean IsOrigin(POINT P) {
@@ -71,10 +73,10 @@ POINT PlusDelta(POINT P, float deltaX, float deltaY) {
 POINT MirrorOf(POINT P, boolean SbX) {
     if (SbX = TRUE) {
         // thdp sumbu x
-        (P).Y = 0 - (P).Y;
+        (P).Y *= (-1);
     } else {
         // thdp sumbu y
-        (P).X = 0 - (P).X;
+        (P).X *= (-1);
     }
 
     return P;
@@ -89,25 +91,25 @@ float Panjang (POINT P1, POINT P2) {
 }
 
 void Geser(POINT *P, float deltaX, float deltaY) {
-    P->X += deltaX;
-    P->Y += deltaY;
+    Absis(*P) += deltaX;
+    Ordinat(*P) += deltaY;
 }
 
 void GeserKeSbX(POINT *P) {
-    P->Y = 0;
+    Ordinat(*P) = 0;
 }
 
 void GeserKeSbY(POINT *P) {
-    P->X = 0;
+    Absis(*P) = 0;
 }
 
 void Mirror(POINT *P, boolean SbX) {
     if (SbX = TRUE) {
         // thdp sumbu x
-        P->Y = 0 - P->Y;
+        Ordinat(*P) *= (-1);
     } else {
         // thdp sumbu y
-        P->X = 0 - P->X;;
+        Absis(*P) *= (-1);
     }
 }
 
@@ -119,8 +121,8 @@ void Putar(POINT *P, float Sudut) {
     float x = (Absis(*P) * cos) - (Ordinat(*P) * sin);
     float y = (Absis(*P) * sin) + (Ordinat(*P) * cos);
 
-    P->X = x;
-    P->Y = y;
+    Absis(*P) = x;
+    Ordinat(*P) = y;
 }
 
 void PersamaanLinearDuaVariabel(POINT P1, POINT P2) {

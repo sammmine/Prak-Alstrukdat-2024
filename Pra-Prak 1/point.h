@@ -6,6 +6,7 @@
 #define POINT_H
 
 #include "boolean.h"
+#include <math.h>
 
 typedef struct { 
 	float X; /* absis   */

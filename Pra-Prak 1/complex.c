@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <math.h>
 #include "complex.h"
+#include "boolean.h"
 
 boolean IsCOMPLEXValid(float Re, float Im) {
     return TRUE;
 }
 
 void CreateComplex(COMPLEX *C, float Re, float Im) {
-    C->Re = Re;
-    C->Im = Im;
+    Real(*C) = Re;
+    Imag(*C) = Im;
     // kalau pointer penulisannya gini (arrow operator)
 }
 
@@ -21,7 +22,7 @@ void BacaCOMPLEX(COMPLEX *C) {
         printf("Complex tidak valid.\n");
         scanf("%.2f %.2f", &Re, &Im);
     }
-    CreateComplex(C, Re, Im);
+    CreateComplex(&C, Re, Im);
 }
 
 void TulisCOMPLEX(COMPLEX C) {
@@ -87,7 +88,7 @@ float AbsCOMPLEX(COMPLEX C) {
 
 COMPLEX ConjugateCOMPLEX(COMPLEX C) {
     // konjugasi itu hanya menegatifkan komponen imajinernya
-    (C).Im = 0 - (C).Im;
+    (C).Im *= (-1);
 
     return C;
 }
