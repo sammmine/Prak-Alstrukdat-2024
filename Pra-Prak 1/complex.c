@@ -10,87 +10,73 @@ boolean IsCOMPLEXValid(float Re, float Im) {
 void CreateComplex(COMPLEX *C, float Re, float Im) {
     Real(*C) = Re;
     Imag(*C) = Im;
-    // kalau pointer penulisannya gini (arrow operator)
 }
 
 void BacaCOMPLEX(COMPLEX *C) {
     float Re, Im;
 
-    scanf("%.2f %.2f", &Re, &Im);
+    scanf("%f %f", &Re, &Im);
 
-    while (!IsCOMPLEXValid(Re, Im)){
-        printf("Complex tidak valid.\n");
-        scanf("%.2f %.2f", &Re, &Im);
-    }
     CreateComplex(C, Re, Im);
 }
 
 void TulisCOMPLEX(COMPLEX C) {
-    printf("%.2f + %.2fi", (C).Re, (C).Im);
-    // dot operator
+    if ((C).Im < 0) {
+        printf("%.2f%.2fi\n", (C).Re, (C).Im);
+    } else {
+        printf("%.2f+%.2fi\n", (C).Re, (C).Im);
+    }
 }
 
 COMPLEX AddCOMPLEX(COMPLEX C1, COMPLEX C2) {
-    COMPLEX Csum;
+    COMPLEX C;
 
-    (Csum).Re = (C1).Re + (C2).Re;
-    (Csum).Im = (C1).Im + (C2).Im;
+    CreateComplex(&C, (C1).Re+(C2).Re, (C1).Im+(C2).Im);
 
-    return Csum;
+    return C;
 }
 
 COMPLEX SubtractCOMPLEX(COMPLEX C1, COMPLEX C2) {
-    COMPLEX Csub;
+    COMPLEX C;
 
-    (Csub).Re = (C1).Re - (C2).Re;
-    (Csub).Im = (C1).Im - (C2).Im;
+    CreateComplex(&C, (C1).Re-(C2).Re, (C1).Im-(C2).Im);
 
-    return Csub;
+    return C;
 }
 
 COMPLEX MultiplyCOMPLEX(COMPLEX C1, COMPLEX C2) {
-    COMPLEX Cmul;
+    COMPLEX C;
 
-    (Cmul).Re = (C1).Re * (C2).Re - (C1).Im * (C2).Im;
-    (Cmul).Im = (C1).Re * (C2).Im + (C1).Im * (C2).Re;
+    CreateComplex(&C, (C1).Re*(C2).Re - (C1).Im*(C2).Im, (C1).Re*(C2).Im + (C1).Im*(C2).Re);
 
-    return Cmul;
+    return C;
 }
 
 COMPLEX DivideCOMPLEX(COMPLEX C1, COMPLEX C2){
-    COMPLEX Cdiv;
+    COMPLEX C;
     float denom;
 
-    denom = pow((C2).Re, 2) + pow((C2).Im, 2);
+    denom = (C2).Re*(C2).Re + (C2).Im*(C2).Im;
 
     if (denom == 0) {
-        (Cdiv).Re = 0;
-        (Cdiv).Im = 0;
+        CreateComplex(&C, 0, 0);
 
     } else {
-        ConjugateCOMPLEX(C2);
-        Cdiv = MultiplyCOMPLEX(C1, C2);
-        (Cdiv).Re = (Cdiv).Re / denom;
-        (Cdiv).Im = (Cdiv).Im / denom;
- 
+        CreateComplex(&C, ((C1).Re*(C2).Re + (C1).Im*(C2).Im)/denom, (-(C1).Re*(C2).Im + (C2).Re*(C1).Im)/denom);
     }
 
-    return Cdiv;
+    return C;
 }
 
 float AbsCOMPLEX(COMPLEX C) {
-    float modC;
-
-    modC = sqrt(pow((C).Re, 2) + pow((C).Im, 2));
-
-    return modC;
+    return sqrt((C).Re*(C).Re + (C).Im*(C).Im);
 }
 
 COMPLEX ConjugateCOMPLEX(COMPLEX C) {
     // konjugasi itu hanya menegatifkan komponen imajinernya
-    (C).Im *= (-1);
-
-    return C;
+    COMPLEX C1;
+    CreateComplex(&C1, (C).Re, -(C).Im);
+    return C1;
 }
 
 boolean CEQ(COMPLEX C1, COMPLEX C2) {
@@ -98,5 +84,6 @@ boolean CEQ(COMPLEX C1, COMPLEX C2) {
 }
 
 boolean CNEQ(COMPLEX C1, COMPLEX C2) {
-    return ((C1).Re != (C2).Re && (C1).Im != (C2).Im);
+    return ((C1).Re != (C2).Re || (C1).Im != (C2).Im);
 }
+

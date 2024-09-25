@@ -3,6 +3,8 @@
 #include "point.h"
 #include "boolean.h"
 
+// UDAH 100
+
 void CreatePoint (POINT *P, float X, float Y) {
     Absis(*P) = X;
     Ordinat(*P) = Y;
@@ -10,7 +12,7 @@ void CreatePoint (POINT *P, float X, float Y) {
 
 void BacaPOINT(POINT *P) {
     float X, Y;
-    scanf("%.2f %.2f", &X, &Y);
+    scanf("%f %f", &X, &Y);
 
     CreatePoint(P, X, Y);
 }
@@ -40,7 +42,7 @@ boolean IsOnSbY(POINT P) {
 }
 
 int Kuadran(POINT P) {
-    if (!IsOrigin(P) && !IsOnSbX(P) && !IsOnSbY) {
+    if (!IsOrigin(P) && !IsOnSbX(P) && !IsOnSbY(P)) {
         if ((P).X > 0 && (P).Y > 0) {
             return 1;
         } else if ((P).X > 0 && (P).Y < 0) {
