@@ -89,13 +89,13 @@ FRACTION MultiplyNumberFRACTION(int n, FRACTION F1) {
     return F1;
 }
 
-int gcd(int a, int b) {
+int GCD(int a, int b) {
     if (b == 0) return a;
     return gcd(b, a % b);
 }
 
 FRACTION SimplifyFRACTION(FRACTION F) {
-    int fpb = gcd(abs((F).N), abs((F).D));
+    int fpb = GCD(abs((F).N), abs((F).D));
 
     (F).N = (F).N / fpb;
     (F).D = (F).D / fpb;
