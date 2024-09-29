@@ -3,8 +3,10 @@
 #include <math.h>
 #include "circle.h"
 #include "boolean.h"
-#include "point.h"
-#include "point.c"
+// #include "point.h"
+// #include "point.c"
+
+// masih salah di keempat dan di tengah
 
 boolean IsCIRCLEValid(float X, float Y, float R) {
     return (R > 0);

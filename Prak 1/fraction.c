@@ -1,10 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "boolean.h"
 #include "fraction.h"
 
 boolean IsFRACTIONValid(int N, int D) {
-    return (N && D!=0);
+    return (D!=0);
 }
 
 void CreateFRACTION(FRACTION *F, int N, int D) {
@@ -14,71 +13,56 @@ void CreateFRACTION(FRACTION *F, int N, int D) {
 
 void ReadFRACTION(FRACTION *F) {
     int n, d;
-    scanf("%d %d", &n, &d);
 
-    while (!IsFRACTIONValid(n, d)) {
-        printf("FRACTION tidak valid\n");
+    do {
         scanf("%d %d", &n, &d);
-    }
+        if(!IsFRACTIONValid(n,d)) {
+            printf("FRACTION tidak valid\n");
+        } 
+    } while (!IsFRACTIONValid(n,d));
 
     CreateFRACTION(F, n, d);
 }
 
 void WriteFRACTION(FRACTION F) {
+    F = SimplifyFRACTION(F);
     printf("%d/%d", (F).N, (F).D);
 }
 
 FRACTION AddFRACTION(FRACTION F1, FRACTION F2) {
     FRACTION F;
-    int a, b;
 
-    a = (F1).N*(F2).D + (F2).N*(F1).D;
-    b = (F1).D*(F2).D;
+    (F).N = (F1).N*(F2).D + (F2).N*(F1).D;
+    (F).D = (F1).D*(F2).D;
 
-    CreateFRACTION(&F, a, b);
-    F = SimplifyFRACTION(F);
-
-    return F;
+    return SimplifyFRACTION(F);
 }
 
 FRACTION SubtractFRACTION(FRACTION F1, FRACTION F2) {
     FRACTION F;
-    int a, b;
 
-    a = (F1).N*(F2).D - (F2).N*(F1).D;
-    b = (F1).D*(F2).D;
+    (F).N = (F1).N*(F2).D - (F2).N*(F1).D;
+    (F).D = (F1).D*(F2).D;
 
-    CreateFRACTION(&F, a, b);
-    F = SimplifyFRACTION(F);
-
-    return F;
-
+    return SimplifyFRACTION(F);
 }
 
 FRACTION MultiplyFRACTION(FRACTION F1, FRACTION F2) {
     FRACTION F;
-    int a, b;
 
-    a = (F1).N*(F2).N;
-    b = (F1).D*(F2).D;
+    (F).N = (F1).N*(F2).N;
+    (F).D = (F1).D*(F2).D;
 
-    CreateFRACTION(&F, a, b);
-    F = SimplifyFRACTION(F);
-
-    return F;
+    return SimplifyFRACTION(F);
 }
 
 FRACTION DivideFRACTION(FRACTION F1, FRACTION F2) {
     FRACTION F;
-    int a, b;
 
-    a = (F1).N*(F2).D;
-    b = (F1).D*(F2).N;
+    (F).N = (F1).N*(F2).D;
+    (F).D = (F1).D*(F2).N;
 
-    CreateFRACTION(&F, a, b);
-    F = SimplifyFRACTION(F);
-
-    return F;
+    return SimplifyFRACTION(F);
 }
 
 FRACTION MultiplyNumberFRACTION(int n, FRACTION F1) {
@@ -91,18 +75,24 @@ FRACTION MultiplyNumberFRACTION(int n, FRACTION F1) {
 
 int GCD(int a, int b) {
     if (b == 0) return a;
-    return gcd(b, a % b);
+    return GCD(b, a % b);
 }
 
 FRACTION SimplifyFRACTION(FRACTION F) {
-    int fpb = GCD(abs((F).N), abs((F).D));
+    int fpb = GCD((F).N, (F).D);
 
     (F).N = (F).N / fpb;
     (F).D = (F).D / fpb;
+
+    // ini untuk kalau penyebutnya minus, minusnya dipindah ke pembilang
+    if (F.D < 0) {
+        F.N = -F.N;
+        F.D = -F.D;
+    }
 
     return F;
 }
 
 float ToDecimal(FRACTION F) {
-    return ((float)(F).N / (float)(F).D);
+    return ((float)(F).N / (F).D);
 }

@@ -1,55 +1,39 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include "boolean.h"
-#include "rotating_point.h"
-#include "circle.h"
-#include "point.h"
-#include "circle.c"
-#include "point.c"
+# include <stdio.h>
+# include "rotating_point.h"
+# include <math.h>
+
 
 COMPLEX PowerCOMPLEX(COMPLEX C, int p) {
-    COMPLEX H; 
-    // buat temporary
-    int i;
+    COMPLEX result;
+    result.Re = 1.0;
+    result.Im = 0.0;
 
-    (H).Re = 1;
-    (H).Im = 0;
+    for (int i = 0; i < p; i++) {
+        COMPLEX temp; 
 
-    for (i=1; i<=p; i++) {
-        H = MultiplyCOMPLEX(C, H);
+        temp.Re = result.Re * C.Re - result.Im * C.Im;
+        temp.Im = result.Re * C.Im + result.Im * C.Re;
+
+        result = temp;
     }
 
-    return H;
+    return result;
 }
 
-void TransformPointByComplexPower(POINT *P, COMPLEX C, int n) {
-    int i;
+void TransformPointByComplexPower(POINT *P, COMPLEX C, int n){
+    for (int i = 1; i <=n; i++){
+        COMPLEX pC = PowerCOMPLEX(C,i);
 
-    for (i = 1; i <= n; i++) {
-        C = PowerCOMPLEX(C, i); 
-        (*P).X = (*P).X * (C).Re - (*P).Y * (C).Im;
-        (*P).Y = (*P).X * (C).Im + (*P).Y * (C).Re;
+        float newX = Absis(*P)*pC.Re - Ordinat(*P)*pC.Im;
+        float newY = Absis(*P)*pC.Im + Ordinat(*P)*pC.Re;
 
-        if ( ((*P).X*(*P).X + (*P).Y*(*P).Y) != 1) {
-            printf("Titik keluar dari lingkaran pada iterasi ke %d\n", i);
+        Absis(*P) = newX;
+        Ordinat(*P) = newY;
+        
+        if (Absis(*P)*Absis(*P) + Ordinat(*P)*Ordinat(*P) > 1){
+            printf("Titik keluar dari lingkaran pada iterasi ke %d", i);
             return;
         }
     }
-
-    printf("Titik tetap berada di dalam lingkaran setelah %d iterasi\n", n);
-}
-
-int main() {
-    POINT P;
-    COMPLEX C;
-    int n;
-
-    scanf("%f %f", &(P).X, &(P).Y);
-    scanf("%f %f", &(C).Re, &(C).Im);
-    scanf("%d", &n);
-
-    TransformPointByComplexPower(&P, C, n);
-
-    return 0;
+    printf("Titik tetap berada di dalam lingkaran setelah %d iterasi", n);
 }
