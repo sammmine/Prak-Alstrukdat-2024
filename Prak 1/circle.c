@@ -21,12 +21,12 @@ void CreateCIRCLE(CIRCLE *C, float X, float Y, float R) {
 void ReadCIRCLE(CIRCLE *C) {
     float x, y, r;
 
-    scanf("%f %f %f", &x , &y, &r);
-
-    while (!IsCIRCLEValid(x, y, r)) {
-        printf("CIRCLE tidak valid\n");
-        scanf("%f %f %f", &x , &y, &r);
-    }
+    do {
+        scanf("%f %f %f", &x, &y, &r);
+        if (!IsCIRCLEValid(x, y, r)) {
+            printf("CIRCLE tidak valid\n");
+        }
+    } while (!IsCIRCLEValid(x, y, r));
 
     CreateCIRCLE(C, x, y, r);
 }

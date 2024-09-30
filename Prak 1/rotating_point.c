@@ -21,6 +21,11 @@ COMPLEX PowerCOMPLEX(COMPLEX C, int p) {
 }
 
 void TransformPointByComplexPower(POINT *P, COMPLEX C, int n){
+    if (n == 0) {
+        printf("Titik keluar dari lingkaran pada iterasi ke 0");
+        return;
+    }
+
     for (int i = 1; i <=n; i++){
         COMPLEX pC = PowerCOMPLEX(C,i);
 
