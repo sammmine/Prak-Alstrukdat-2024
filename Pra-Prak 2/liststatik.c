@@ -94,12 +94,12 @@ ListStatik plusMinusList(ListStatik l1, ListStatik l2, boolean plus){
 }
 
 boolean isListEqual(ListStatik l1, ListStatik l2){
-    if (listLength(l1) != listLength(l2)) return false;
+    if (listLength(l1) != listLength(l2)) return FALSE;
     int i, firstIDXl1 = getFirstIdx(l1), firstIDXl2 = getFirstIdx(l2);
     for (i=0; i<listLength(l1); i++) {
-        if (ELMT(l1, firstIDXl1+i) != ELMT(l2, firstIDXl2+i)) return false;
+        if (ELMT(l1, firstIDXl1+i) != ELMT(l2, firstIDXl2+i)) return FALSE;
     }
-    return true;
+    return TRUE;
 }
 
 int indexOf(ListStatik l, ElType val){
