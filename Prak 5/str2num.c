@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "boolean.h"
-#include "mesinkata.c"
-#include "mesinkarakter.c"
+#include "mesinkata.h"
+#include "mesinkarakter.h"
 
 boolean isBelas() {
     return
@@ -130,34 +130,6 @@ boolean isAngka() {
     currentWord.TabWord[6] == 's';
 }
 
-void tulisAngka(int angka) {
-    //hitung digit
-    if (angka == 0) {
-        printf("0");
-        return;
-    }
-
-    int digit = 0;
-    int temp = angka;
-    while (temp > 0) {
-        temp = temp / 10;
-        digit += 1;
-    }
-
-    int pembagi = 1;
-    int i;
-    for (i = 0; i < digit-1; i++) {
-        pembagi *= 10;
-
-    }
-
-    while (pembagi > 0) {
-        printf("%d", angka/pembagi);
-        angka %= pembagi;
-        pembagi /= 10;
-    }
-}
-
 void tulisKata() {
     int i;
     for (i = 0; i < currentWord.Length; i++) {
@@ -270,7 +242,7 @@ void prosesAngka() {
         }
         result += current_angka;
     }
-    tulisAngka(result);
+    printf("%d", result);
 }
 
 int main() {
