@@ -14,7 +14,7 @@ boolean cekStream(Word kata) {
     int at_count = 0;
     char store[51]; // Store currentWord ke array of char untuk mempermudah parsing
     strncpy(store, kata.TabWord, kata.Length); // strncpy(dest, src, n) adalah fungsi untuk meng-copy sejumlah karakter
-    store[kata.Length] = '\0';
+    store[kata.Length] = '\0'; // NULL
 
     // Hitung dulu @-nya ada berapa (harus ada 3) (loop all)
     for (int i = 0; i < kata.Length; i++) {
