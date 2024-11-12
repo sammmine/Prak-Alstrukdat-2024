@@ -8,10 +8,10 @@
 #include "boolean.h"
 
 #define Nil -1
-#define MaxEl 10000
+#define MaxEl 1000000
 /* Nil adalah stack dengan elemen kosong . */
 
-typedef int infotype;
+typedef char infotype;
 typedef int address;   /* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */

@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include "stack.h"
 
-// KHUSUS UNTUK NOMOR 2 DAN 3, TIPE DATA INFOTYPE DIGANTI MENJADI CHAR
-
 int main() {
     int N, i;
     char ch, close;

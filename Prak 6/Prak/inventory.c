@@ -51,7 +51,7 @@ int main() {
                 count += 1;
             }
             if (count == 0){
-                avg = 0; // case stack tidak ada angka (avoiding pembagian dengan nol)
+                avg = 0; // case stack tidak ada angka (avoiding runtime error (pembagian dengan nol))
             } else {
                 avg = sum / count; // floor atau pembulatan ke bawah
             }

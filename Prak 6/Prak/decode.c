@@ -1,74 +1,72 @@
 #include <stdio.h>
 #include "stack.h"
 
-// KHUSUS UNTUK NOMOR 2 DAN 3, TIPE DATA INFOTYPE DIGANTI MENJADI CHAR
-
 int main() {
-    int N, i, j, lenWord;
-    char ch, openBrac, dup;
-    char store[MaxEl], all[MaxEl];
-    Stack word, number;
+    int N, i, j, a, lenWord, angka, tens;
+    char ch, word[MaxEl];
+    Stack stack;
 
-    CreateEmpty(&word);
-    CreateEmpty(&number);
+    CreateEmpty(&stack);
 
     scanf("%d\n", &N);
 
     for(i=0; i<N; i++){
         scanf(" %c", &ch);
         
-        // Jika ch adalah angka, push ch ke stack number
-        if (ch>='0' && ch<='9'){
-            Push(&number, ch); // Ch masih char, belum diubah ke integer
+        // Close bracket berperan sebagai penanda untuk mengolah word
+        // Jika ch adalah abjad, angka, atau open bracket, push ch ke stack
+        if (ch!=']') {
+            Push(&stack, ch);
         }
 
-        // Jika ch adalah abjad atau '[', push ch ke stack word
-        else if (ch>='a' && ch<='z' || ch=='['){
-            Push(&word, ch);
-        }
-
-        // Jika ch adalah ']', olah stack word
-        else if (ch==']'){
-            // Pop abjad ke array penampung
+        // Jika ch adalah close bracket, maka olah word yang ada di dalam brackets
+        else {
             lenWord = 0;
-            // Olah word yang ada di brackets, sehingga pop sampai '['
-            while(InfoTop(word) != '['){
-                Pop(&word, &store[lenWord]);
+            // Store abjad ke array word
+            // Pop semua abjad dari stack sampai bertemu '['
+            while(InfoTop(stack) != '['){
+                Pop(&stack, &word[lenWord]);
                 lenWord++;
             }
 
-            // Pop '[' dari stack
-            Pop(&word, &openBrac);
+            // Buang '[' dari stack
+            Pop(&stack, &ch);
+
+            // Proses angka yang akan digunakan untuk menduplikasi word
+            angka = 0;
+            tens = 1;
+            while (!IsEmpty(stack) && InfoTop(stack) >= '0' && InfoTop(stack) <= '9') {
+                Pop(&stack, &ch);
+                angka = angka + (ch - '0') * tens;
+                tens *= 10;
+            }
 
             // Reverse abjad-abjad, sebelum diduplikasi
             for (j=0; j<lenWord/2; j++){
-                char temp = store[j];
-                store[j] = store[lenWord-j-1];
-                store[lenWord-j-1] = temp;
+                char temp = word[j];
+                word[j] = word[lenWord-j-1];
+                word[lenWord-j-1] = temp;
             }
 
-            // Push abjad-abjad di array kembali ke stack dan diduplikasi
-            Pop(&number, &dup);
-            for (j=0; j<(dup-'0'); j++){
+            // Duplikasi word sebanyak variabel angka
+            for (j=0; j<angka; j++){
                 for (int k=0; k<lenWord; k++){
-                    Push(&word, store[k]);
+                    Push(&stack, word[k]);
                 }
             }
         }
     }
 
-    // Keluaran
-
     // Masukkan semua abjad ke array penampung lagi
     lenWord=0;
-    while(!IsEmpty(word)){
-        Pop(&word, &store[lenWord]);
+    while(!IsEmpty(stack)){
+        Pop(&stack, &word[lenWord]);
         lenWord++;
     }
 
     // Print, tapi reverse
     for (i=lenWord-1; i>=0; i--){
-        printf("%c", store[i]);
+        printf("%c", word[i]);
     }
     printf("\n");
 
