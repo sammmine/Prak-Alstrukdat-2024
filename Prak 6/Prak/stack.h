@@ -8,7 +8,10 @@
 #include "boolean.h"
 
 #define Nil -1
-#define MaxEl 1000000
+
+// define MaxEl 1000 // UNTUK INVENTORY.C
+// define MaxEl 1000 // UNTUK KURUNG.C
+#define MaxEl 1000000 // UNTUK DECODE.C
 /* Nil adalah stack dengan elemen kosong . */
 
 typedef char infotype;
