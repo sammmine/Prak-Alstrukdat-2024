@@ -11,3 +11,4 @@
 - Prak 5: ADT Mesin Karakter & Mesin Kata
 - Prak 6: ADT Stack
 - Prak 7: ADT Queue
+- Prak 8: ADT Linked List
