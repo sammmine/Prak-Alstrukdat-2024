@@ -1,6 +1,6 @@
 # Prak-Alstrukdat-2024
 
-> Repository ini dibuat untuk mengarsipkan soal dan file praktikum mata kuliah Algoritma dan Struktur Data prodi Teknik Informatika tahun 2024 oleh Samantha Laqueenna Ginting (Lana).
+> Repository ini dibuat untuk mengarsipkan soal dan file praktikum mata kuliah Algoritma dan Struktur Data prodi Teknik Informatika tahun 2024. Dibuat oleh Samantha Laqueenna Ginting (Lana).
 
 ### Praktikum Directory
 - Prak 0: Pengenalan Bahasa C
@@ -12,3 +12,4 @@
 - Prak 6: ADT Stack
 - Prak 7: ADT Queue
 - Prak 8: ADT Linked List
+- Prak 9: ADT Variasi Linked List (Circular Linked List)
