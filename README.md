@@ -12,4 +12,5 @@
 - Prak 6: ADT Stack
 - Prak 7: ADT Queue
 - Prak 8: ADT Linked List
-- Prak 9: ADT Variasi Linked List (Circular Linked List)
+- Prak 9: ADT Circular Linked List (Variasi Linked List)
+- Prak 10: ADT Recursive Linked List (Variasi Linked List)
